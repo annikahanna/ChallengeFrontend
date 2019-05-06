@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'create-challenge',
+        children: [
+          {
+            path: '',
+            loadChildren: '../create-challenge/create-challenge.module#CreateChallengePageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
