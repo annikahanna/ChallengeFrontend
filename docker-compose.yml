@@ -1,0 +1,15 @@
+version: "3.4"
+
+services:
+  node:
+    build:
+      context: .
+      target: ionic-env
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "8100:8100"
+    volumes:
+      - .:/home/node/app
+    working_dir: /home/node/app
+    command: bash -c "npm i && ionic serve --no-open"
