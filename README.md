@@ -6,7 +6,7 @@ The Frontend is based on Ionic. To start the App just run `ionic serve` in your 
 set up already. Run `ionic serve --lab` to get a mobile device view in your browser.
 
 
-##Give it a go
+## Give it a go
 If you just want to take a look at the running Ionic application, run the following commands to get started.
 
 **Note:** The resulting application won't react to your local code changes since the image just holds a copy of the
@@ -33,20 +33,20 @@ foo@bar:~/ChallengeFrontend$ docker run \
     -p 8100:8100 \
     node-builder
 ```
-Finally open your browser at [http://localhost:8100](http://localhost:8100) and enjoy the Ionic frontend! ;-)
+Finally, open your browser at [http://localhost:8100](http://localhost:8100) and enjoy the Ionic frontend! ;-)
 
 If you want to stop the container, just STRG+C out of the terminal. The container will be removed automatically after it
 stopped (due to option `--rm`). If you want to run the application again without code changes, just use the previous
 command again.
 
-##Try it with code changes
+## Try it with code changes
 We can build a container which mounts your local project directory. Therefore Ionic will recognize your code changes
 (live reload).
 
 There are two possible ways to get started. If you have [docker-compose](https://docs.docker.com/compose/install/)
 installed, refer to the first option.
 
-####Option 1: Build and run with docker-compose (recommended)
+#### Option 1: Build and run with docker-compose (recommended)
 
 The repository holds a little docker-compose.yml which makes the development more convenient. You will need 
 [docker-compose](https://docs.docker.com/compose/install/) installed.
@@ -56,7 +56,7 @@ Just let docker-compose let the magic happen (this might take a while for the fi
 foo@bar:~/ChallengeFrontend$ docker-compose up
 ```
 
-####Option 2: Build and run with the help of the Dockerfile
+#### Option 2: Build and run with the help of the Dockerfile
 
 Let's build the Docker image. We'll name it node-ionic-env. (If you don't have Docker installed already, get it from 
 [here](https://docs.docker.com/install/).)
