@@ -1,8 +1,8 @@
-FROM node:lts AS ionic-env
+FROM node:lts AS runtime
 RUN npm i -g ionic
 
 FROM scratch AS builder
-COPY --from=ionic-env / /
+COPY --from=runtime / /
 WORKDIR /home/node/app
 COPY . .
 RUN npm i

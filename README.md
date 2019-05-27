@@ -55,6 +55,11 @@ Just let docker-compose let the magic happen (this might take a while for the fi
 ```console
 foo@bar:~/ChallengeFrontend$ docker-compose up
 ```
+Don't forget to shutdown and remove the containers after use. Run (from a different console or after killing the 
+containers with STRG+C):
+```console
+foo@bar:~/ChallengeFrontend$ docker-compose down
+```
 
 #### Option 2: Build and run with the help of the Dockerfile
 
