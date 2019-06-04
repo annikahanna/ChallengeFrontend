@@ -1,26 +1,29 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {Routes, RouterModule} from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { CreateChallengePage } from './create-challenge.page';
+import {CreateChallengePage} from './create-challenge.page';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: CreateChallengePage
-  }
+    {
+        path: '',
+        component: CreateChallengePage
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [CreateChallengePage]
+    imports: [
+        HttpClientModule,
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes)
+    ],
+    declarations: [CreateChallengePage]
 })
-export class CreateChallengePageModule {}
+export class CreateChallengePageModule {
+}

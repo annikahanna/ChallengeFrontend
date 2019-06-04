@@ -4,12 +4,60 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+
+
+
     <p>
-        Hier ist ein Input Feld:
+        Erstelle eine eigene Challenge für die Community!
     </p>
     <ion-item>
-        <ion-label position="floating">Name</ion-label>
-        <ion-input></ion-input>
+        <ion-label position="floating">Titel</ion-label>
+        <ion-input placeholder="Eine aussagekräftiger Titel..." [(ngModel)]="title"></ion-input>
     </ion-item>
+    <ion-item>
+        <ion-label position="floating">Beschreibung</ion-label>
+        <ion-input placeholder="Eine nähere Beschreibung..." required="true" [(ngModel)]="description"></ion-input>
+    </ion-item>
+
+    <ion-chip>
+        <ion-icon name="heart" color="dark"></ion-icon>
+        <ion-label>Gesamt Score: {{gesamtScore}}</ion-label>
+    </ion-chip>
+
+    <ion-item>
+        <ion-label position="floating">Sport Score</ion-label>
+        <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="spoScore" (ionChange)="valueChanged()">
+            <ion-icon size="small" slot="start" name="walk" color="primary"></ion-icon>
+            <ion-icon slot="end" name="airplane" color="danger"></ion-icon>
+        </ion-range>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Mental Score </ion-label>
+        <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="menScore" (ionChange)="valueChanged()">
+            <ion-icon size="small" slot="start" name="bug" color="primary"></ion-icon>
+            <ion-icon slot="end" name="bulb" color="danger"></ion-icon>
+        </ion-range>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Nutritional Score</ion-label>
+        <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="nutScore" (ionChange)="valueChanged()">
+            <ion-icon size="small" slot="start" name="cafe" color="primary"></ion-icon>
+            <ion-icon slot="end" name="flask" color="danger"></ion-icon>
+        </ion-range>
+    </ion-item>
+
+    <!-- Checkboxes in a List -->
+    <ion-list>
+        <ion-item *ngFor="let entry of tagsFromAPI">
+            <ion-label>{{entry.tag.tagName}}</ion-label>
+            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+    <ion-button (click)="sendCreateChallengeRequest()">Send</ion-button>
+
+
+
+
 </ion-content>
