@@ -7,7 +7,6 @@
 <ion-content padding>
 
 
-
     <p>
         Erstelle eine eigene Challenge für die Community!
     </p>
@@ -20,11 +19,6 @@
         <ion-input placeholder="Eine nähere Beschreibung..." required="true" [(ngModel)]="description"></ion-input>
     </ion-item>
 
-    <ion-chip>
-        <ion-icon name="heart" color="dark"></ion-icon>
-        <ion-label>Gesamt Score: {{gesamtScore}}</ion-label>
-    </ion-chip>
-
     <ion-item>
         <ion-label position="floating">Sport Score</ion-label>
         <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="spoScore" (ionChange)="valueChanged()">
@@ -33,7 +27,7 @@
         </ion-range>
     </ion-item>
     <ion-item>
-        <ion-label position="floating">Mental Score </ion-label>
+        <ion-label position="floating">Mental Score</ion-label>
         <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="menScore" (ionChange)="valueChanged()">
             <ion-icon size="small" slot="start" name="bug" color="primary"></ion-icon>
             <ion-icon slot="end" name="bulb" color="danger"></ion-icon>
@@ -46,6 +40,10 @@
             <ion-icon slot="end" name="flask" color="danger"></ion-icon>
         </ion-range>
     </ion-item>
+    <ion-chip>
+        <ion-icon name="heart" color="dark"></ion-icon>
+        <ion-label>Gesamt Score: {{gesamtScore}}</ion-label>
+    </ion-chip>
 
     <!-- Checkboxes in a List -->
     <ion-list>
@@ -56,8 +54,6 @@
     </ion-list>
 
     <ion-button (click)="sendCreateChallengeRequest()">Send</ion-button>
-
-
 
 
 </ion-content>

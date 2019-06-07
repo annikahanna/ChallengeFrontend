@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */import { Challenge } from './challenge';
+import { Venturer } from './venturer';
 
 
 export interface Task { 
@@ -18,4 +19,5 @@ export interface Task {
     beaten?: Date;
     failed?: Date;
     challenge?: Challenge;
+    venturer?: Venturer;
 }

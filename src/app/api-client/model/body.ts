@@ -11,5 +11,5 @@
  */
 
 export interface Body { 
-    tags?: Array<string>;
+    tagName?: string;
 }

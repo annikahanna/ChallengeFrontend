@@ -17,8 +17,6 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { Body } from '../model/body';
-import { Body2 } from '../model/body2';
 import { Challenge } from '../model/challenge';
 import { Tag } from '../model/tag';
 import { Task } from '../model/task';
@@ -166,10 +164,10 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createTask(body?: Body2, observe?: 'body', reportProgress?: boolean): Observable<Task>;
-    public createTask(body?: Body2, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Task>>;
-    public createTask(body?: Body2, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Task>>;
-    public createTask(body?: Body2, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createTask(body?: Challenge, observe?: 'body', reportProgress?: boolean): Observable<Task>;
+    public createTask(body?: Challenge, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Task>>;
+    public createTask(body?: Challenge, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Task>>;
+    public createTask(body?: Challenge, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -518,10 +516,10 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getChallengsByTags(body?: Body, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getChallengsByTags(body?: Body, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getChallengsByTags(body?: Body, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
-    public getChallengsByTags(body?: Body, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getChallengsByTags(body?: Array<Tag>, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
+    public getChallengsByTags(body?: Array<Tag>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
+    public getChallengsByTags(body?: Array<Tag>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
+    public getChallengsByTags(body?: Array<Tag>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -558,13 +556,15 @@ export class DefaultService {
     /**
      * 
      * 
+     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getDaily(observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getDaily(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getDaily(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
-    public getDaily(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getDaily(body?: Array<Tag>, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
+    public getDaily(body?: Array<Tag>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
+    public getDaily(body?: Array<Tag>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
+    public getDaily(body?: Array<Tag>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
 
         let headers = this.defaultHeaders;
 
@@ -579,9 +579,15 @@ export class DefaultService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json'
         ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/challenge/daily`,
+        return this.httpClient.post<Array<Challenge>>(`${this.basePath}/api/challenge/daily`,
+            body,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -594,13 +600,18 @@ export class DefaultService {
     /**
      * 
      * 
+     * @param venturerId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getDoneTasks(observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getDoneTasks(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getDoneTasks(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
-    public getDoneTasks(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getDoneTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
+    public getDoneTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
+    public getDoneTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
+    public getDoneTasks(venturerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (venturerId === null || venturerId === undefined) {
+            throw new Error('Required parameter venturerId was null or undefined when calling getDoneTasks.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -617,7 +628,7 @@ export class DefaultService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allDone`,
+        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allDone/${encodeURIComponent(String(venturerId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -630,13 +641,18 @@ export class DefaultService {
     /**
      * 
      * 
+     * @param venturerId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOpenTasks(observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getOpenTasks(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getOpenTasks(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
-    public getOpenTasks(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getOpenTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
+    public getOpenTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
+    public getOpenTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
+    public getOpenTasks(venturerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (venturerId === null || venturerId === undefined) {
+            throw new Error('Required parameter venturerId was null or undefined when calling getOpenTasks.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -653,7 +669,7 @@ export class DefaultService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allFailed`,
+        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allFailed/${encodeURIComponent(String(venturerId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -707,13 +723,18 @@ export class DefaultService {
     /**
      * 
      * 
+     * @param venturerId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getTasks(observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getTasks(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getTasks(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
-    public getTasks(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
+    public getTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
+    public getTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
+    public getTasks(venturerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (venturerId === null || venturerId === undefined) {
+            throw new Error('Required parameter venturerId was null or undefined when calling getTasks.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -730,7 +751,7 @@ export class DefaultService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/all`,
+        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/all/${encodeURIComponent(String(venturerId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -743,13 +764,18 @@ export class DefaultService {
     /**
      * 
      * 
+     * @param venturerId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getTerminatedTasks(observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getTerminatedTasks(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getTerminatedTasks(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
-    public getTerminatedTasks(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getTerminatedTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
+    public getTerminatedTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
+    public getTerminatedTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
+    public getTerminatedTasks(venturerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (venturerId === null || venturerId === undefined) {
+            throw new Error('Required parameter venturerId was null or undefined when calling getTerminatedTasks.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -766,7 +792,7 @@ export class DefaultService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allTerminated`,
+        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allTerminated/${encodeURIComponent(String(venturerId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

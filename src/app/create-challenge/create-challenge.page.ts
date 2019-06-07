@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Challenge, DefaultService, Tag} from '../api-client';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-create-challenge',
@@ -20,8 +21,9 @@ export class CreateChallengePage implements OnInit {
     public tagsFromAPI: TagWithEntry[] = [];
     private tags: Tag[] = [];
 
-    constructor(public api: DefaultService) {
-    }
+    constructor(private api: DefaultService,
+                private router: Router,
+    ) {}
 
     ngOnInit() {
         this.initializeTags();
@@ -60,11 +62,12 @@ export class CreateChallengePage implements OnInit {
         };
         console.log('HALLO');
         this.api.createChallenge(challenge).subscribe();
+        this.router.navigate(['tabs'])
     }
 
 }
 
-class TagWithEntry {
+export class TagWithEntry {
     tag: Tag;
     isChecked: Boolean;
 
