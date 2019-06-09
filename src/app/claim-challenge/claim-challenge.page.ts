@@ -51,6 +51,7 @@ export class ClaimChallengePage implements OnInit {
             venturer: {id: 1}
         };
         this.api.createTask(task).subscribe();
+
     }
 
 }
