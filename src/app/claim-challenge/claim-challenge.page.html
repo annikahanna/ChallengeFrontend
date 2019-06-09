@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>claim-challenge</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <!-- Checkboxes in a List -->
+    <ion-list>
+        <ion-item *ngFor="let entry of tagsFromAPI">
+            <ion-label>{{entry.tag.tagName}}</ion-label>
+            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+    <ion-button (click)="sendPreferences()">Get Challenges!</ion-button>
+
+
+    <ion-card *ngFor="let c of challenges">
+        <ion-item>
+            <ion-icon name="ribbon" slot="start"></ion-icon>
+            <ion-label>{{c.title}}</ion-label>
+            <ion-button fill="outline" slot="end" (click)="accept(c)">Accept!</ion-button>
+        </ion-item>
+
+        <ion-card-content>
+            {{c.description}}
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
