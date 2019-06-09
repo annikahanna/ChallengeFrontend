@@ -164,10 +164,10 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createTask(body?: Challenge, observe?: 'body', reportProgress?: boolean): Observable<Task>;
-    public createTask(body?: Challenge, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Task>>;
-    public createTask(body?: Challenge, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Task>>;
-    public createTask(body?: Challenge, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createTask(body?: Task, observe?: 'body', reportProgress?: boolean): Observable<Task>;
+    public createTask(body?: Task, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Task>>;
+    public createTask(body?: Task, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Task>>;
+    public createTask(body?: Task, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -183,7 +183,7 @@ export class DefaultService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            '*/*'
+            'application/json'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
@@ -535,7 +535,7 @@ export class DefaultService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            '*/*'
+            'application/json'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {

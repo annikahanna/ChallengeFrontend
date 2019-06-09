@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Challenge, DefaultService, Tag} from '../api-client';
+import {Challenge, DefaultService, Tag, Task} from '../api-client';
 import {TagWithEntry} from '../create-challenge/create-challenge.page';
 import {applySourceSpanToExpressionIfNeeded} from '@angular/compiler/src/output/output_ast';
 
@@ -42,7 +42,15 @@ export class ClaimChallengePage implements OnInit {
     accept(c : Challenge){
         let ind = this.challenges.indexOf(c);
         this.challenges.splice(ind, 1);
-        this.api.createTask(c).subscribe();
+        let task : Task = {
+            failed: null,
+            done: null,
+            challenge: c,
+            accepted: null,
+            beaten: null,
+            venturer: {id: 1}
+        };
+        this.api.createTask(task).subscribe();
     }
 
 }
