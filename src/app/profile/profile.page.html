@@ -1,7 +1,15 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Profil</ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
+
     <ion-card>
         <ion-card-header>
-            <ion-card-title>Profil</ion-card-title>
+            <ion-card-title>
+                Infos
+            </ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
@@ -30,7 +38,7 @@
                 <ion-label>{{venturer.nutritionScore}}</ion-label>
             </ion-chip>
             <ion-chip>
-                <ion-label><b>Menatl-Score: </b></ion-label>
+                <ion-label><b>Mental-Score: </b></ion-label>
                 <ion-label>{{venturer.mentalScore}}</ion-label>
             </ion-chip>
         </ion-card-content>
@@ -42,9 +50,21 @@
         </ion-card-header>
         <ion-card-content>
             <ion-list *ngFor="let taskList of sortedTasks; let i = index">
-                <ion-label><b>{{i == 0 ? "Offene Tasks" : i == 1 ? "Abgeschlossene Tasks" : "Failed Tasks"}}</b></ion-label>
-                <ion-item *ngFor="let task of taskList" text-wrap>
-                    <ion-label>{{task.challenge.title}} <br> {{task.challenge.description}} <br> <ion-badge color="primary">accepted: {{task.accepted}}</ion-badge> </ion-label>
+                <ion-list-header>{{i == 0 ? "Offene Tasks" : i == 1 ? "Abgeschlossene Tasks" : "Failed Tasks"}}</ion-list-header>
+                <ion-item *ngFor="let task of taskList">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-label><b>{{task.challenge.title}}</b></ion-label>
+                        </ion-row>
+                        <ion-row>
+                            <p>
+                                {{task.challenge.description}}
+                            </p>
+                        </ion-row>
+                        <ion-row>
+                            <ion-badge color="primary">angenommen am: {{toDate(task.accepted)}}</ion-badge>
+                        </ion-row>
+                    </ion-grid>
                 </ion-item>
             </ion-list>
         </ion-card-content>

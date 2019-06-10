@@ -59,7 +59,7 @@ export class ProfilePage implements OnInit {
                     label: 'Dein Score',
                     data: [this.venturer.sportScore, this.venturer.nutritionScore, this.venturer.mentalScore],
                     backgroundColor: [
-                        'rgba(246, 190, 0, 0.5)'
+                        'rgba(151, 27, 47, 0.5)'
                     ]
                 },
                     {
@@ -97,6 +97,13 @@ export class ProfilePage implements OnInit {
                 this.failedTasks.push(t);
             }
         }
+    }
+
+    private toDate(date: Date): string{
+
+        let string = new Date(date);
+        return string.getDate().toString()+'.'+(string.getMonth()+1).toString()+'.'+string.getFullYear();
+
     }
 
 }

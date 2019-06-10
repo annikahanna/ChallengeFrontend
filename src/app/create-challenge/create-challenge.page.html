@@ -1,59 +1,70 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>createChallenge</ion-title>
+        <ion-title>Erstelle eine Challenge</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="floating">Titel</ion-label>
+                <ion-input [(ngModel)]="title"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Beschreibung</ion-label>
+                <ion-input required="true"
+                           [(ngModel)]="description"></ion-input>
+            </ion-item>
 
-    <p>
-        Erstelle eine eigene Challenge für die Community!
-    </p>
-    <ion-item>
-        <ion-label position="floating">Titel</ion-label>
-        <ion-input placeholder="Eine aussagekräftiger Titel..." [(ngModel)]="title"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label position="floating">Beschreibung</ion-label>
-        <ion-input placeholder="Eine nähere Beschreibung..." required="true" [(ngModel)]="description"></ion-input>
-    </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Sport Score</ion-label>
+                <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="spoScore"
+                           (ionChange)="valueChanged()">
+                    <ion-icon size="small" slot="start" name="paper-plane" color="primary"></ion-icon>
+                    <ion-icon slot="end" name="airplane" color="secondary"></ion-icon>
+                </ion-range>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Mental Score</ion-label>
+                <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="menScore"
+                           (ionChange)="valueChanged()">
+                    <ion-icon size="small" slot="start" name="rainy" color="primary"></ion-icon>
+                    <ion-icon slot="end" name="sunny" color="secondary"></ion-icon>
+                </ion-range>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Nutritional Score</ion-label>
+                <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="nutScore"
+                           (ionChange)="valueChanged()">
+                    <ion-icon size="small" slot="start" name="trash" color="primary"></ion-icon>
+                    <ion-icon slot="end" name="pizza" color="secondary"></ion-icon>
+                </ion-range>
+            </ion-item>
+            <ion-chip color="secondary">
+                <ion-icon name="heart" ></ion-icon>
+                <ion-label>Gesamt Score: {{gesamtScore}}</ion-label>
+            </ion-chip>
 
-    <ion-item>
-        <ion-label position="floating">Sport Score</ion-label>
-        <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="spoScore" (ionChange)="valueChanged()">
-            <ion-icon size="small" slot="start" name="walk" color="primary"></ion-icon>
-            <ion-icon slot="end" name="airplane" color="danger"></ion-icon>
-        </ion-range>
-    </ion-item>
-    <ion-item>
-        <ion-label position="floating">Mental Score</ion-label>
-        <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="menScore" (ionChange)="valueChanged()">
-            <ion-icon size="small" slot="start" name="bug" color="primary"></ion-icon>
-            <ion-icon slot="end" name="bulb" color="danger"></ion-icon>
-        </ion-range>
-    </ion-item>
-    <ion-item>
-        <ion-label position="floating">Nutritional Score</ion-label>
-        <ion-range min="0" max="50" color="danger" pin="true" [(ngModel)]="nutScore" (ionChange)="valueChanged()">
-            <ion-icon size="small" slot="start" name="cafe" color="primary"></ion-icon>
-            <ion-icon slot="end" name="flask" color="danger"></ion-icon>
-        </ion-range>
-    </ion-item>
-    <ion-chip>
-        <ion-icon name="heart" color="dark"></ion-icon>
-        <ion-label>Gesamt Score: {{gesamtScore}}</ion-label>
-    </ion-chip>
+            <!-- Checkboxes in a List -->
+            <ion-list>
+                <ion-list-header>
+                    Kategorien
+                </ion-list-header>
+                <ion-item *ngFor="let entry of tagsFromAPI">
+                    <ion-label>{{entry.tag.tagName}}</ion-label>
+                    <ion-checkbox slot="end" [(ngModel)]="entry.isChecked" color="secondary"></ion-checkbox>
+                </ion-item>
+            </ion-list>
 
-    <!-- Checkboxes in a List -->
-    <ion-list>
-        <ion-item *ngFor="let entry of tagsFromAPI">
-            <ion-label>{{entry.tag.tagName}}</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-        </ion-item>
-    </ion-list>
-
-    <ion-button (click)="sendCreateChallengeRequest()">Send</ion-button>
+            <ion-button (click)="sendCreateChallengeRequest()" expand="full">
+                <ion-icon name="planet"></ion-icon>
+                Einreichen
+                <ion-icon name="planet"></ion-icon>
+            </ion-button>
+        </ion-card-content>
+    </ion-card>
 
 
 </ion-content>
