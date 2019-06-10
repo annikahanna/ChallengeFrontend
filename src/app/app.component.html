@@ -6,16 +6,18 @@
             </ion-toolbar>
         </ion-header>
         <ion-content>
-            <ion-img src="/assets/profil.png"></ion-img>
             <ion-list>
-                <ion-item routerLink="/tabs/profile">Profil</ion-item>
+                <ion-item routerLink="/tabs/profile">
+                    <ion-icon name="contact" color="secondary"></ion-icon>
+                     <h3>Profil</h3>
+                </ion-item>
             </ion-list>
         </ion-content>
     </ion-menu>
     <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="secondary">
             <ion-title>
-                <ion-button (click)="openFirst()">
+                <ion-button (click)="openFirst()" size="small">
                     <ion-icon name="menu"></ion-icon>
                 </ion-button>
                 Challenge Box
