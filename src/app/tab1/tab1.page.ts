@@ -31,10 +31,17 @@ export class Tab1Page implements OnInit {
                     err => {
                     },
                     () => {
-                        console.log(this.tasks)
+                        console.log(this.tasks);
                     }
                 )
             }
         );
+    }
+
+    private toDate(date: Date): string{
+
+        let string = new Date(date);
+        return string.getDate().toString()+'.'+(string.getMonth()+1).toString()+'.'+string.getFullYear();
+
     }
 }
