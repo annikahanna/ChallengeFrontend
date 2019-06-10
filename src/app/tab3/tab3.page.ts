@@ -21,7 +21,9 @@ export class Tab3Page implements OnInit {
             v => this.venturer = v,
             err => {
             },
-            () => {this.chart()
+            () => {
+                console.log(this.venturer)
+                this.chart();
             this.api.getTasks(this.venturer.id).subscribe(
                 t => this.tasks = t,
                 err => {
