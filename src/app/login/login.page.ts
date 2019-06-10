@@ -17,6 +17,8 @@ export class LoginPage {
               private readonly toastCtrl: ToastController) {
   }
 
+  username : string;
+
   signup() {
     this.router.navigate(['/signup']);
   }
@@ -26,6 +28,8 @@ export class LoginPage {
       spinner: 'bubbles',
       message: 'Logging in ...'
     });
+
+    localStorage.setItem("username", value.username)
 
     loading.present();
 

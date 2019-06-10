@@ -25,11 +25,11 @@ export class AuthService {
         const jwt = localStorage.getItem(this.jwtTokenName);
 
         if (jwt
-            // TODO:&& !this.jwtHelper.isTokenExpired(jwt)
-          ) {
+        // TODO:&& !this.jwtHelper.isTokenExpired(jwt)
+        ) {
 
-        console.log('jwt: ',this.jwtHelper.isTokenExpired(jwt));
-console.log(jwt);
+            console.log('jwt: ', this.jwtHelper.isTokenExpired(jwt));
+            console.log(jwt);
             return new Promise((resolve, _) => {
 
                 this.httpClient.get(`${environment.basePath}/api/login/authenticate`)
@@ -43,7 +43,7 @@ console.log(jwt);
                         });
             });
 
-            } else {
+        } else {
             this.logout();
             return Promise.resolve(false);
         }
@@ -62,6 +62,7 @@ console.log(jwt);
 
     private handleJwtResponse(jwt: string): string {
         localStorage.setItem(this.jwtTokenName, jwt);
+
         this.authUser.next(jwt);
 
         return jwt;
