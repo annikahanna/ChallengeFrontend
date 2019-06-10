@@ -11,17 +11,27 @@ import {AppComponent} from './app.component';
 import {BASE_PATH, DefaultService} from './api-client';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
+import {JwtModule} from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+    return localStorage.getItem('jwt_token');
+}
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, JwtModule.forRoot({
+        config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: environment.whitelistedDomains
+        }
+    })],
     providers: [
         StatusBar,
         SplashScreen,
         DefaultService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-        {provide: BASE_PATH, useValue: environment.basePath },
+        {provide: BASE_PATH, useValue: environment.basePath},
     ],
     bootstrap: [AppComponent]
 })
