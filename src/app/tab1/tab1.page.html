@@ -1,12 +1,36 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Offene Aufgaben</ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-card>
-    <ion-img src="/assets/shapes.svg"></ion-img>
-    <ion-card-header>
-      <ion-card-title>Aktivität</ion-card-title>
-    </ion-card-header>
+    <ion-card *ngFor="let task of tasks">
+        <ion-card-header>
+            <ion-card-title>{{task.challenge.title}}</ion-card-title>
+        </ion-card-header>
 
-    <ion-card-content>
-      Ich bin eine Aktivität
-    </ion-card-content>
-  </ion-card>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>{{task.challenge.description}}</ion-row>
+                <ion-row>
+                    <ion-chip>
+                        <ion-icon name="bicycle"></ion-icon>
+                        <ion-label>{{task.challenge.sportPoints}}</ion-label>
+                    </ion-chip>
+                    <ion-chip>
+                        <ion-icon name="pulse"></ion-icon>
+                        <ion-label>{{task.challenge.mentalPoints}}</ion-label>
+                    </ion-chip>
+                    <ion-chip>
+                        <ion-icon name="restaurant"></ion-icon>
+                        <ion-label>{{task.challenge.nutritionPoints}}</ion-label>
+                    </ion-chip>
+                </ion-row>
+                <ion-row>
+                    <ion-label>Angenommen am {{toDate(task.accepted)}}</ion-label>
+                </ion-row>
+            </ion-grid>
+
+        </ion-card-content>
+    </ion-card>
 </ion-content>
