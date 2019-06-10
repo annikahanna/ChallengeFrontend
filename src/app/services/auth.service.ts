@@ -23,6 +23,7 @@ export class AuthService {
 
     hasAccess(): Promise<boolean> {
         const jwt = localStorage.getItem(this.jwtTokenName);
+        console.log(localStorage.getItem(this.jwtTokenName));
 
         if (jwt
         // TODO:&& !this.jwtHelper.isTokenExpired(jwt)
