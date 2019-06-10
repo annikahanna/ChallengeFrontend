@@ -39,19 +39,19 @@ export class ClaimChallengePage implements OnInit {
         this.api.getDaily(chosenTags).subscribe(challenges => this.challenges = challenges);
     }
 
-    accept(c : Challenge){
+    accept(c: Challenge) {
         let ind = this.challenges.indexOf(c);
         this.challenges.splice(ind, 1);
-        let task : Task = {
-            failed: null,
-            done: null,
-            challenge: c,
-            accepted: null,
-            beaten: null,
-            venturer: {id: 1}
-        };
-        this.api.createTask(task).subscribe();
 
+        // create task from information
+        let task: Task = {
+            accepted: new Date(),
+            beaten: null,
+            challenge: c,
+            done: null,
+            failed: null,
+            venturer: {id: 1}};
+        this.api.createTask(task).subscribe();
     }
 
 }
