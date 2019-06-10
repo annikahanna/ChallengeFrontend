@@ -678,47 +678,6 @@ export class DefaultService {
     /**
      * 
      * 
-     * @param venturerId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getDoneTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getDoneTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getDoneTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
-    public getDoneTasks(venturerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (venturerId === null || venturerId === undefined) {
-            throw new Error('Required parameter venturerId was null or undefined when calling getDoneTasks.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allDone/${encodeURIComponent(String(venturerId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -759,9 +718,9 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOpenTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getOpenTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getOpenTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
+    public getOpenTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Task>>;
+    public getOpenTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Task>>>;
+    public getOpenTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Task>>>;
     public getOpenTasks(venturerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (venturerId === null || venturerId === undefined) {
@@ -783,7 +742,7 @@ export class DefaultService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allFailed/${encodeURIComponent(String(venturerId))}`,
+        return this.httpClient.get<Array<Task>>(`${this.basePath}/api/task/allFailed/${encodeURIComponent(String(venturerId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -841,9 +800,9 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
+    public getTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Task>>;
+    public getTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Task>>>;
+    public getTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Task>>>;
     public getTasks(venturerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (venturerId === null || venturerId === undefined) {
@@ -865,48 +824,7 @@ export class DefaultService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/all/${encodeURIComponent(String(venturerId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param venturerId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getTerminatedTasks(venturerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Challenge>>;
-    public getTerminatedTasks(venturerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Challenge>>>;
-    public getTerminatedTasks(venturerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Challenge>>>;
-    public getTerminatedTasks(venturerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (venturerId === null || venturerId === undefined) {
-            throw new Error('Required parameter venturerId was null or undefined when calling getTerminatedTasks.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allTerminated/${encodeURIComponent(String(venturerId))}`,
+        return this.httpClient.get<Array<Task>>(`${this.basePath}/api/task/all/${encodeURIComponent(String(venturerId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -1069,6 +987,88 @@ export class DefaultService {
 
         return this.httpClient.post<any>(`${this.basePath}/api/login`,
             body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param taskId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public setTaskDone(taskId: number, observe?: 'body', reportProgress?: boolean): Observable<Task>;
+    public setTaskDone(taskId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Task>>;
+    public setTaskDone(taskId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Task>>;
+    public setTaskDone(taskId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (taskId === null || taskId === undefined) {
+            throw new Error('Required parameter taskId was null or undefined when calling setTaskDone.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Task>(`${this.basePath}/api/task/setDone/${encodeURIComponent(String(taskId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param taskId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public setTaskFailed(taskId: number, observe?: 'body', reportProgress?: boolean): Observable<Task>;
+    public setTaskFailed(taskId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Task>>;
+    public setTaskFailed(taskId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Task>>;
+    public setTaskFailed(taskId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (taskId === null || taskId === undefined) {
+            throw new Error('Required parameter taskId was null or undefined when calling setTaskFailed.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Task>(`${this.basePath}/api/task/setFailed/${encodeURIComponent(String(taskId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

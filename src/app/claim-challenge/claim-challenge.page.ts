@@ -46,7 +46,6 @@ export class ClaimChallengePage implements OnInit {
         // create task from information
         let task: Task = {
             accepted: new Date(),
-            beaten: null,
             challenge: c,
             done: null,
             failed: null,

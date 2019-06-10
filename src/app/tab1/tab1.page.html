@@ -29,6 +29,15 @@
                 <ion-row>
                     <ion-label>Angenommen am {{toDate(task.accepted)}}</ion-label>
                 </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-button fill="outline" (click)="done(task)">Done!</ion-button>
+                    </ion-col>
+                    <ion-col>
+                        <ion-button fill="outline" color="danger" (click)="failed(task)">Failed!</ion-button>
+                    </ion-col>
+
+                </ion-row>
             </ion-grid>
 
         </ion-card-content>

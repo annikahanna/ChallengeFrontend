@@ -16,7 +16,6 @@ export interface Task {
     id?: number;
     accepted?: Date;
     done?: Date;
-    beaten?: Date;
     failed?: Date;
     challenge?: Challenge;
     venturer?: Venturer;

@@ -42,7 +42,7 @@
         </ion-card-header>
         <ion-card-content>
             <ion-list *ngFor="let taskList of sortedTasks; let i = index">
-                <ion-label>{{i == 0 ? "Offene Tasks" : i == 1 ? "Abgeschlossene Tasks" : "Failed Tasks"}}</ion-label>
+                <ion-label><b>{{i == 0 ? "Offene Tasks" : i == 1 ? "Abgeschlossene Tasks" : "Failed Tasks"}}</b></ion-label>
                 <ion-item *ngFor="let task of taskList" text-wrap>
                     <ion-label>{{task.challenge.title}} <br> {{task.challenge.description}} <br> <ion-badge color="primary">accepted: {{task.accepted}}</ion-badge> </ion-label>
                 </ion-item>

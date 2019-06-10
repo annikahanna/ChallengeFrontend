@@ -20,7 +20,10 @@ export class ProfilePage implements OnInit {
     private beatenTasks : Task[] = [];
     private failedTasks : Task[] = [];
 
-    ngOnInit() {
+    ngOnInit(): void {
+    }
+
+    ionViewWillEnter() {
         // Get User
         this.api.findVenturerByEMail(localStorage.getItem('username')).subscribe(
             v => this.venturer = v,
@@ -33,10 +36,8 @@ export class ProfilePage implements OnInit {
                     err => {
                     },
                     () => {
-                        console.log("AUFGABNE", this.tasks);
                         this.sortTasks();
                         this.initializeTaskArray();
-                        console.log(this.sortedTasks);
                     }
                 );
             }
@@ -90,7 +91,7 @@ export class ProfilePage implements OnInit {
             if (t.done == null && t.failed == null){
                 this.openTasks.push(t);
                 console.log("opentask", t);
-            } else if (t.done < new Date()){
+            } else if (!t.failed == null && t.done < new Date()){
                 this.beatenTasks.push(t);
             } else if (t.failed < new Date()) {
                 this.failedTasks.push(t);
