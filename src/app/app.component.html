@@ -16,15 +16,27 @@
     </ion-menu>
     <ion-header>
         <ion-toolbar color="secondary">
-            <ion-title>
-                <ion-button (click)="openFirst()" size="small">
-                    <ion-icon name="menu"></ion-icon>
-                </ion-button>
-                Challenge Box
-            </ion-title>
-            <ion-button (click)="logout()" size="small">
-                <ion-icon name="power"></ion-icon>
-            </ion-button>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-button (click)="openFirst()" size="small">
+                            <ion-icon name="menu"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                    <ion-col>
+                        <p>
+                            Challenge Box
+                        </p>
+                    </ion-col>
+                    <ion-col align="right">
+                        <ion-button (click)="logout()" size="small">
+                            <ion-icon name="power"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+
         </ion-toolbar>
     </ion-header>
     <ion-router-outlet main></ion-router-outlet>

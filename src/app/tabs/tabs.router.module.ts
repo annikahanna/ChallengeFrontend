@@ -20,6 +20,15 @@ const routes: Routes = [
                 ]
             },
             {
+                path: 'users',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: '../users/users.module#UsersPageModule'
+                    }
+                ]
+            },
+            {
                 path: 'tab2',
                 children: [
                     {
