@@ -53,7 +53,7 @@
                     Kategorien
                 </ion-list-header>
                 <ion-item *ngFor="let entry of tagsFromAPI">
-                    <ion-label>{{entry.tag.tagName}}</ion-label>
+                    <p>{{entry.tag.tagName}}</p>
                     <ion-checkbox slot="end" [(ngModel)]="entry.isChecked" color="secondary"></ion-checkbox>
                 </ion-item>
             </ion-list>

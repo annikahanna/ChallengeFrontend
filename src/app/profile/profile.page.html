@@ -17,15 +17,15 @@
                 <ion-label>
                     <b>Name</b>
                 </ion-label>
-                <ion-label>{{venturer.firstName}} {{venturer.lastName}}</ion-label>
+                <p>{{venturer.firstName}} {{venturer.lastName}}</p>
             </ion-item>
             <ion-item>
                 <ion-label>
                     <b>E-Mail</b>
                 </ion-label>
-                <ion-label>
+                <p>
                     {{venturer.email}}
-                </ion-label>
+                </p>
             </ion-item>
 
             <canvas id="myChart" width="400" height="400"></canvas>
@@ -50,7 +50,7 @@
         </ion-card-header>
         <ion-card-content>
             <ion-list *ngFor="let taskList of sortedTasks; let i = index">
-                <ion-list-header>{{i == 0 ? "Offene Tasks" : i == 1 ? "Abgeschlossene Tasks" : "Failed Tasks"}}</ion-list-header>
+                <ion-list-header><h2><b>{{i == 0 ? "Offene Tasks" : i == 1 ? "Abgeschlossene Tasks" : "Failed Tasks"}}</b></h2></ion-list-header>
                 <ion-item *ngFor="let task of taskList">
                     <ion-grid>
                         <ion-row>

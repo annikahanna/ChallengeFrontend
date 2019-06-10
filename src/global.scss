@@ -11,5 +11,11 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 ion-router-outlet{
-  margin-top: 40px;
+  margin-top: 60px;
+}
+
+ion-menu{
+  ion-header{
+    margin-top: 30px;
+  }
 }
