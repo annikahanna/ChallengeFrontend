@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { Challenge } from '../model/challenge';
 import { Tag } from '../model/tag';
 import { Task } from '../model/task';
+import { User } from '../model/user';
 import { Venturer } from '../model/venturer';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -57,6 +58,42 @@ export class DefaultService {
         return false;
     }
 
+
+    /**
+     * 
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public authenticate(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public authenticate(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public authenticate(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public authenticate(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<any>(`${this.basePath}/api/login/authenticate`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * 
@@ -276,54 +313,13 @@ export class DefaultService {
     /**
      * 
      * 
-     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findAllVenturer(id: number, observe?: 'body', reportProgress?: boolean): Observable<Venturer>;
-    public findAllVenturer(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Venturer>>;
-    public findAllVenturer(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Venturer>>;
-    public findAllVenturer(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling findAllVenturer.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.get<Venturer>(`${this.basePath}/api/venturer/${encodeURIComponent(String(id))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public findAllVenturer1(observe?: 'body', reportProgress?: boolean): Observable<Array<Venturer>>;
-    public findAllVenturer1(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Venturer>>>;
-    public findAllVenturer1(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Venturer>>>;
-    public findAllVenturer1(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findAllVenturer(observe?: 'body', reportProgress?: boolean): Observable<Array<Venturer>>;
+    public findAllVenturer(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Venturer>>>;
+    public findAllVenturer(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Venturer>>>;
+    public findAllVenturer(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -423,6 +419,88 @@ export class DefaultService {
         ];
 
         return this.httpClient.get<Tag>(`${this.basePath}/api/tag/name/${encodeURIComponent(String(tagName))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param email 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findVenturerByEMail(email: string, observe?: 'body', reportProgress?: boolean): Observable<Venturer>;
+    public findVenturerByEMail(email: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Venturer>>;
+    public findVenturerByEMail(email: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Venturer>>;
+    public findVenturerByEMail(email: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling findVenturerByEMail.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Venturer>(`${this.basePath}/api/venturer/${encodeURIComponent(String(email))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findVenturerById(id: number, observe?: 'body', reportProgress?: boolean): Observable<Venturer>;
+    public findVenturerById(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Venturer>>;
+    public findVenturerById(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Venturer>>;
+    public findVenturerById(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling findVenturerById.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Venturer>(`${this.basePath}/api/venturer/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -629,6 +707,42 @@ export class DefaultService {
         ];
 
         return this.httpClient.get<Array<Challenge>>(`${this.basePath}/api/task/allDone/${encodeURIComponent(String(venturerId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getHello(observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public getHello(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public getHello(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public getHello(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<string>(`${this.basePath}/api/helloworld/test`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -911,6 +1025,50 @@ export class DefaultService {
         ];
 
         return this.httpClient.get<Challenge>(`${this.basePath}/api/helloworld/2/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public login(body?: User, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public login(body?: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public login(body?: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public login(body?: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<any>(`${this.basePath}/api/login`,
+            body,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

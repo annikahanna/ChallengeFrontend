@@ -3,8 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-    basePath: 'http://localhost:8080/challengeBox'
+    production: false,
+    basePath: 'http://localhost:8080/challengeBox',
+    serverURL: 'http://localhost:8080',
+    whitelistedDomains: ['localhost:8080']
 };
 
 
