@@ -19,7 +19,7 @@ export class ClaimChallengePage implements OnInit {
 
     public tagsFromAPI: TagWithEntry[] = [];
     private tags: Tag[] = [];
-    private challenges : Challenge[] = [];
+    private challenges: Challenge[] = [];
 
     initializeTags() {
         this.api.findAllTags().subscribe(
@@ -44,13 +44,19 @@ export class ClaimChallengePage implements OnInit {
         this.challenges.splice(ind, 1);
 
         // create task from information
-        let task: Task = {
-            accepted: new Date(),
-            challenge: c,
-            done: null,
-            failed: null,
-            venturer: {id: 1}};
-        this.api.createTask(task).subscribe();
+        this.api.findVenturerByEMail(localStorage.getItem('username')).subscribe(
+            vent => {
+                let task: Task = {
+                    accepted: new Date(),
+                    challenge: c,
+                    done: null,
+                    failed: null,
+                    venturer: {id: vent.id}
+                };
+                this.api.createTask(task).subscribe();
+            }
+        );
+
     }
 
 }

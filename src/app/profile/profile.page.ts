@@ -15,10 +15,10 @@ export class ProfilePage implements OnInit {
     private venturer: Venturer;
     private tasks: Task[];
 
-    private sortedTasks : Task[][] = [];
-    private openTasks : Task[] = [];
-    private beatenTasks : Task[] = [];
-    private failedTasks : Task[] = [];
+    private sortedTasks: Task[][] = [];
+    private openTasks: Task[] = [];
+    private beatenTasks: Task[] = [];
+    private failedTasks: Task[] = [];
 
     ngOnInit(): void {
     }
@@ -79,18 +79,18 @@ export class ProfilePage implements OnInit {
         });
     }
 
-    initializeTaskArray(){
+    initializeTaskArray() {
         this.sortedTasks.push(this.openTasks);
         this.sortedTasks.push(this.beatenTasks);
         this.sortedTasks.push(this.failedTasks);
     }
 
     sortTasks() {
-        for (let t of this.tasks){
+        for (let t of this.tasks) {
             t.accepted = new Date(t.accepted);
-            if (t.done == null && t.failed == null){
+            if (t.done == null && t.failed == null) {
                 this.openTasks.push(t);
-            } else if (t.failed == null && t.done < new Date()){
+            } else if (t.failed == null && t.done < new Date()) {
                 this.beatenTasks.push(t);
             } else if (t.failed < new Date()) {
                 this.failedTasks.push(t);
@@ -98,10 +98,10 @@ export class ProfilePage implements OnInit {
         }
     }
 
-    private toDate(date: Date): string{
+    private toDate(date: Date): string {
 
         let string = new Date(date);
-        return string.getDate().toString()+'.'+(string.getMonth()+1).toString()+'.'+string.getFullYear();
+        return string.getDate().toString() + '.' + (string.getMonth() + 1).toString() + '.' + string.getFullYear();
 
     }
 
