@@ -20,6 +20,7 @@ export interface Venturer {
     sportScore?: number;
     nutritionScore?: number;
     mentalScore?: number;
+    token?: string;
     tasks?: Array<Task>;
     completeScore?: number;
 }
