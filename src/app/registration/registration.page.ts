@@ -30,7 +30,9 @@ export class RegistrationPage implements OnInit {
             lastName: this.lastName,
             email: this.email,
             password: this.passwort
-        }).subscribe();
+        }).subscribe( ()=> {},
+            (err)=> console.log(err),
+            () => this.router.navigate(['/login']));
     }
 
 }
