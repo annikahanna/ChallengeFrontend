@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Challenge, DefaultService, Tag, Task} from '../api-client';
 import {TagWithEntry} from '../create-challenge/create-challenge.page';
 import {applySourceSpanToExpressionIfNeeded} from '@angular/compiler/src/output/output_ast';
+import {createOutput} from '@angular/compiler/src/core';
 
 @Component({
     selector: 'app-claim-challenge',

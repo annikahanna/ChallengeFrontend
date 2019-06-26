@@ -60,7 +60,6 @@ export class AuthService {
 
     private handleJwtResponse(jwt: string): string {
         localStorage.setItem(this.jwtTokenName, jwt);
-
         this.authUser.next(jwt);
 
         return jwt;
