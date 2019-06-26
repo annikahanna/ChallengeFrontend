@@ -27,16 +27,14 @@ export class Tab1Page implements OnInit {
         this.api.findVenturerByEMail(localStorage.getItem("username")).subscribe(
             v => this.venturer = v,
             err => {
-                console.log('Feeeeehler')
+                console.log(err)
             },
             () => {
-                console.log('venturer:', this.venturer);
                 this.api.getOpenTasks(this.venturer.id).subscribe(
                     t => this.tasks = t,
                     err => {
                     },
                     () => {
-                        console.log(this.tasks);
                     }
                 )
             }

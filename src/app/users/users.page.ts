@@ -28,7 +28,6 @@ export class UsersPage implements OnInit {
                     err => {
                     },
                     () => {
-                        console.log(this.venturers);
                     })
             }
         )

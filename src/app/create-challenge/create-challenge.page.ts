@@ -60,7 +60,6 @@ export class CreateChallengePage implements OnInit {
             mentalPoints: this.menScore,
             nutritionPoints: this.nutScore
         };
-        console.log('HALLO');
         this.api.createChallenge(challenge).subscribe();
         this.router.navigate(['tabs'])
     }

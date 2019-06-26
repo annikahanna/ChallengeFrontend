@@ -90,7 +90,6 @@ export class ProfilePage implements OnInit {
             t.accepted = new Date(t.accepted);
             if (t.done == null && t.failed == null){
                 this.openTasks.push(t);
-                console.log("opentask", t);
             } else if (t.failed == null && t.done < new Date()){
                 this.beatenTasks.push(t);
             } else if (t.failed < new Date()) {

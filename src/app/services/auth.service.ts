@@ -23,14 +23,11 @@ export class AuthService {
 
     hasAccess(): Promise<boolean> {
         const jwt = localStorage.getItem(this.jwtTokenName);
-        console.log(localStorage.getItem(this.jwtTokenName));
 
         if (jwt
         // TODO:&& !this.jwtHelper.isTokenExpired(jwt)
         ) {
 
-            console.log('jwt: ', this.jwtHelper.isTokenExpired(jwt));
-            console.log(jwt);
             return new Promise((resolve, _) => {
 
                 this.httpClient.get(`${environment.basePath}/api/login/authenticate`)
