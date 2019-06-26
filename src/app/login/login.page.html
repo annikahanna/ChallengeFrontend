@@ -2,29 +2,38 @@
   <form #form="ngForm" (ngSubmit)="login(form.value)" novalidate>
     <ion-list>
       <ion-item>
-        <ion-label position="floating">Username</ion-label>
-        <ion-input type="text" name="username" ngModel required #username="ngModel"
+        <ion-label position="floating">Benutzername</ion-label>
+        <ion-input type="email" name="username" ngModel required #username="ngModel"
                    [class.invalid]="username.errors && username.dirty"></ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="username.errors?.required && username.dirty">
         <ion-label>
-          Username is required
+          Benutzername wird benötigt
         </ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Password</ion-label>
+        <ion-label position="floating">Passwort</ion-label>
         <ion-input type="password" name="password" ngModel required #password="ngModel"
                    [class.invalid]="password.errors && password.dirty"></ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="password.errors?.required && password.dirty">
         <ion-label>
-          Password is required
+          Passwort wird benötigt
         </ion-label>
       </ion-item>
 
       <div padding>
-        <ion-button color="primary" expand="block" type="submit" [disabled]="!form.valid">Login</ion-button>
+        <ion-button color="primary" expand="block" type="submit" [disabled]="!form.valid">
+          <ion-icon name="planet"></ion-icon>
+          Login
+          <ion-icon name="planet"></ion-icon></ion-button>
+      </div>
+      <div padding>
+        <ion-button color="primary" expand="block" routerLink="/registration">
+          <ion-icon name="rocket"></ion-icon>
+          Werde Mitglied
+          <ion-icon name="rocket"></ion-icon></ion-button>
       </div>
 
     </ion-list>

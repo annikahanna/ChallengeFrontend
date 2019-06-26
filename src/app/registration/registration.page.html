@@ -1,0 +1,52 @@
+<ion-content class="ion-padding">
+  <form #form="ngForm" (ngSubmit)="login(form.value)" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Vorname</ion-label>
+        <ion-input type="text" name="firstName" ngModel required #firstName="ngModel"
+                   [class.invalid]="firstName.errors && firstName.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="firstName.errors?.required && firstName.dirty">
+        <ion-label>
+          Vorname wird benötigt
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nachname</ion-label>
+        <ion-input type="text" name="lastName" ngModel required #lastName="ngModel"
+                   [class.invalid]="lastName.errors && lastName.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="lastName.errors?.required && lastName.dirty">
+        <ion-label>
+          Nachname wird benötigt
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">E-Mail</ion-label>
+        <ion-input type="email" name="username" ngModel required #username="ngModel"
+                   [class.invalid]="username.errors && username.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="username.errors?.required && username.dirty">
+        <ion-label>
+          E-mail wird benötigt
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Passwort</ion-label>
+        <ion-input type="password" name="password" ngModel required #password="ngModel"
+                   [class.invalid]="password.errors && password.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="password.errors?.required && password.dirty">
+        <ion-label>
+          Passwort wird benötigt
+        </ion-label>
+      </ion-item>
+
+      <div padding>
+        <ion-button color="primary" expand="block" type="submit" [disabled]="!form.valid">Registrieren</ion-button>
+      </div>
+
+    </ion-list>
+  </form>
+</ion-content>
