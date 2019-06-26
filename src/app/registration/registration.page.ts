@@ -22,7 +22,7 @@ export class RegistrationPage implements OnInit {
     this.venturer.lastName = value.lastName;
     this.venturer.firstName = value.firstName;
     this.venturer.password = value.password;
-    this.api.registerVenturer(this.venturer).subscribe(
+    this.api.registerVenturer().subscribe(
         venturer =>{this.venturer = venturer},
         error => console.log(error),
         () => {
