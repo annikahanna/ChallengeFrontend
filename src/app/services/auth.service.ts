@@ -54,14 +54,11 @@ export class AuthService {
     }
 
     login(values: any): Observable<string> {
-        console.log(values);
         return this.httpClient.post(`${environment.basePath}/api/login`, values, {responseType: 'text'})
             .pipe(tap(jwt => this.handleJwtResponse(jwt)));
     }
 
     private handleJwtResponse(jwt: string): string {
-        console.log("HALALAI");
-        console.log(jwt);
         localStorage.setItem(this.jwtTokenName, jwt);
 
         this.authUser.next(jwt);
